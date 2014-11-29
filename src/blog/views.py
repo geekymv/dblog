@@ -23,7 +23,10 @@ def detail(request, id):
     return render_to_response('detail.html',
                               {'blog': blog},
                               context_instance=RequestContext(request))
+
+def update(request, id):
     
+    return render_to_response()    
     
     
     
