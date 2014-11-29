@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title%}
+	首页
+{% endblock %}
+
+{% block content_header %}
+<h3 class="blog-title">
+ 	<em>文章</em>
+</h3>
+<p class="lead blog-description">技术博客分享</p>
+{% endblock %}
+
+{% block content_body %}
+	{% for blog in blogs %}
+	  <div class="blog-post">
+	    <h3 class="blog-post-title"><a href="/blog/detail/{{blog.id}}">{{blog.caption}}</a></h3>
+	    <p class="blog-post-meta">
+	    	标签:
+	    	{% for tag in blog.tags.all %}
+	    		{{tag.tag_name}}
+	    	{% endfor %}
+	    	时间:
+	    	{{blog.update_time|date:"Y年m月d日 H:i"}} by <a href="#">{{blog.author}}</a>
+	    </p>
+	    <p>{{blog.content}}</p>
+	  </div><!-- /.blog-post -->
+	{% endfor %}
+{% endblock %}		
+
+
+
+
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Geek_ymv">
+    <title>Blog</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/blog.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <style type="text/css">
+    	.blog-main {
+    		border: 1px solid #ccc;
+    	}
+    	.blog-post {
+    		border: 1px solid #abc;
+    	}
+    	.blog-post-meta a {
+    		font-size: 14px;
+    	}
+    </style>
+    
+  </head>
+
+  <body>
+    <div class="blog-masthead">
+      <div class="container">
+        <!-- Fixed navbar -->
+	    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">MyBlog</a>
+	        </div>
+	        <div id="navbar" class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li class="active"><a href="#">首页</a></li>
+	            <li><a href="#about">文章</a></li>
+	            <li><a href="#contact">图片</a></li>
+	            <li><a href="">音乐</a></li>
+	          </ul>
+	          <ul class="nav navbar-nav navbar-right">
+	          	<li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+	              <ul class="dropdown-menu" role="menu">
+	                <li><a href="#">Action</a></li>
+	                <li><a href="#">Another action</a></li>
+	                <li class="divider"></li>
+	                <li class="dropdown-header">Nav header</li>
+	                <li><a href="#">Separated link</a></li>
+	                <li><a href="#">One</a></li>
+	              </ul>
+	            </li>
+	            <li><a href="">Static top</a></li>
+	            <li><a href="">Fixed top</a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="blog-header">
+        <h3 class="blog-title"><em>文章</em></h3>
+        <p class="lead blog-description">
+			技术博客分享
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+        {% for blog in blogs %}
+          <div class="blog-post">
+            <h3 class="blog-post-title">{{blog.caption}}</h3>
+            <p class="blog-post-meta">
+            	标签:
+            	{% for tag in blog.tags.all %}
+            		{{tag.tag_name}}
+            	{% endfor %}
+            	时间:
+            	{{blog.update_time|date:"Y年m月d日 H:i"}} by <a href="#">{{blog.author}}</a>
+            </p>
+            <p>{{blog.content}}</p>
+          </div><!-- /.blog-post -->
+		{% endfor %}
+		
+          <nav>
+            <ul class="pager">
+              <li><a href="#">上一页</a></li>
+              <li><a href="#">下一页</a></li>
+            </ul>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>关于博主</h4>
+            <p>程序员 <em>Geek_ymv</em></p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>友情链接</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <div class="blog-footer">
+      <p>Designed by Geek_ymv | Copyright &copy; 2014</p>
+      <p>
+        <a href="#">回到顶部</a>
+      </p>
+    </div>
+
+    <script src="/static/js/jquery-1.11.1.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

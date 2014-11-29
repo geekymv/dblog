@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{ blog.caption }}
+{% endblock %}
+
+{% load comments %}
+
+{% block content_body %}
+	
+	<div class="blog-post" style="margin-top: 40px;">
+	  <h3 class="blog-post-title"><a href="/blog/detail/{{blog.id}}">{{blog.caption}}</a></h3>
+	    <p class="blog-post-meta">
+	    	标签:
+	    	{% for tag in blog.tags.all %}
+	    		{{tag.tag_name}}
+	    	{% endfor %}
+	    	时间:
+	    	{{blog.update_time|date:"Y年m月d日 H:i"}} by <a href="#">{{blog.author}}</a>
+	    </p>
+	    <p>{{blog.content}}</p>
+	</div><!-- /.blog-post -->
+
+	{% get_comment_count for blog as comment_count %}
+	{% if comment_count == 0 %}
+		还没有评论~~
+	{% else %}
+		共有条{{comment_count}}评论		
+	{% endif %}
+	
+	<!-- 显示评论提交表单 -->
+	{% get_comment_form for blog as form %}
+	<table>
+	  <form action="{% comment_form_target %}" method="post">
+	    {% csrf_token %}
+	    {{ form }}
+	    <tr>
+	      <td colspan="2">
+	        <input type="submit" name="submit" value="Post">
+	        <input type="submit" name="preview" value="Preview">
+	      </td>
+	    </tr>
+	  </form>
+	</table>
+
+{% endblock %}
+
+
+
+
